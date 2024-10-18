@@ -7,7 +7,7 @@ const cocktailsAPI = axios.create({
     },
 });
 
-type Cocktail = {
+export type Cocktail = {
     id: number,
     name: string,
     instructions: string,
@@ -18,8 +18,12 @@ type Cocktail = {
     updatedAt: string,
 }
 
-export const fetchCocktails  = async (): Promise<Cocktail[]> => {
+export const fetchAllCocktails  = async (): Promise<Cocktail[]> => {
     const response: AxiosResponse = await cocktailsAPI.get('/cocktails');
     return response.data;
 }
 
+export const fetchCocktailsPage = async ({page}: {page: number}) => {
+    const response: AxiosResponse = await cocktailsAPI.get(`/cocktails?page=${page}&perPage=12`);
+    return response.data;
+}
