@@ -5,7 +5,14 @@ const ErrorPage = () => {
     const navigate = useNavigate();
     const error = useRouteError();
 
-    const shown_text = isRouteErrorResponse(error) ? error.statusText : "Something unexpected happened";
+    const shown_text = (() => {
+        if (isRouteErrorResponse(error)) {
+            return error.statusText;
+        } else if (error instanceof Error) {
+            return error.message;
+        }
+        return 'Somethin unexpected happened';
+    })();
 
     return (
         <div className='flex flex-col font-semibold bg-slate-200 justify-center items-center h-screen text-3xl'>

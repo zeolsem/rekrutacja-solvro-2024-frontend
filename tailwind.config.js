@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: colors.slate,
-        background: colors.slate,
+        primary: colors.rose,
+        background: colors.amber,
       }
     },
   },

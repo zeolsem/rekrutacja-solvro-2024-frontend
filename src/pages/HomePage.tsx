@@ -1,21 +1,13 @@
-import {useQuery} from "@tanstack/react-query";
-import {fetchCocktails} from "../api/cocktailsAPI.tsx";
+import React from "react";
+import {Link} from "react-router-dom";
 
 const HomePage: React.FC = () => {
-    const cocktails = useQuery({
-        queryKey: ["cocktails"],
-        queryFn: fetchCocktails,
-    });
-
-    if (cocktails.isLoading) {
-        return <div>Loading...</div>;
-    }
-    else if (cocktails.isError) {
-        return <div>Error</div>
-    }
-
     return (
-        <div>n</div>
+        <div>
+            <Link to='/cocktails'>
+                To cocktails search and view.
+            </Link>
+        </div>
     )
 }
 
