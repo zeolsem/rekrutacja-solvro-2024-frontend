@@ -1,17 +1,23 @@
 import {useQuery} from "@tanstack/react-query";
 import {cocktailsPageQuery} from "../api/queries.tsx";
 import {Cocktail} from "../api/cocktailsAPI.tsx";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {queryClient} from "../main.tsx";
+import CocktailCard from "../components/CocktailCard.tsx";
+import {useNavigate, useParams} from "react-router-dom";
 
 /**
  * This page shows paginated view of cocktail Cards.
  * @constructor
  */
 const CocktailsPage = () => {
-    const [page, setPage] = useState(1);
+    const navigate = useNavigate();
+    const { page: pageParam } = useParams();
+    const page = Number(pageParam) || 1;
     const { status, data: response, error, isFetching, isPlaceholderData } = useQuery(cocktailsPageQuery(page));
 
+
+    // Prefetch next page
     useEffect(() => {
        if (!isPlaceholderData && response?.hasMore) {
            queryClient.prefetchQuery({
@@ -28,31 +34,44 @@ const CocktailsPage = () => {
         return <div>Error: {error.message}</div>
     }
     return (
-        <div className='text-primary-50 font-semibold'>
-            <div>
+        <div className='text-primary-50 flex flex-col items-center font-semibold'>
+            {/* Cocktail cards grid*/}
+            <div className='grid grid-cols-1 lg:grid-cols-3 container'>
                 {response.data.length === 0 ? (
                     <i className='text-center'>No cocktails matching the query.</i>
                 ) : (
                     response.data.map((cocktail: Cocktail) => (
-                        <div key={cocktail.id}>{cocktail.name}</div>
+                        <CocktailCard key={cocktail.id} cocktail={cocktail}/>
                     ))
                 )}
             </div>
-            <div>Current Page: {page}</div>
-            <button
-                onClick={() => setPage((old) => Math.max(old - 1, 1))}
-                disabled={page === 1}
-                className='m-3 p-3 bg-primary-800 rounded-md '
-            >
-                Previous Page
-            </button>
-            <button
-                onClick={() => setPage((old) => (page != response?.meta.lastPage) ? old + 1 : old)}
-                disabled={isPlaceholderData || page === response?.meta.lastPage}
-                className='m-3 p-3 bg-primary-800 rounded-md '
-            >
-                Next Page
-            </button>
+            {/*Cocktail pages navigation buttons*/}
+            <div className='mx-auto flex flex-col justify-center items-center'>
+                <h1
+                    className='text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-background-600'
+                >
+                    Page {page}
+                </h1>
+                <div className='flex w-max whitespace-nowrap'>
+                    <button
+                        onClick={() => navigate(`/cocktails/${Math.max(page - 1, 1)}`)}
+                        disabled={page === 1}
+                        className='text-xl m-3 py-2 px-4 bg-primary-800 rounded-md w-full'
+                    >
+                        Previous Page
+                    </button>
+                    <button
+                        onClick={() => {
+                            if (response?.meta.lastPage) {
+                                navigate(`/cocktails/${page < response.meta.lastPage ? page + 1 : page}`);
+                        }}}
+                        disabled={isPlaceholderData || page === response?.meta.lastPage}
+                        className='text-xl m-3 py-2 px-4 bg-primary-800 rounded-md w-full'
+                    >
+                        Next Page
+                    </button>
+                </div>
+            </div>
             {
                 isFetching ? <span> Loading...</span> : <></>
             }

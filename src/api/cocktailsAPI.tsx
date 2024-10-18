@@ -10,9 +10,10 @@ const cocktailsAPI = axios.create({
 export type Cocktail = {
     id: number,
     name: string,
-    instructions: string,
-    alcoholic: boolean,
     category: string,
+    instructions: string,
+    imageUrl: string,
+    alcoholic: boolean,
     glass: string,
     createdAt: string,
     updatedAt: string,
@@ -25,5 +26,10 @@ export const fetchAllCocktails  = async (): Promise<Cocktail[]> => {
 
 export const fetchCocktailsPage = async ({page}: {page: number}) => {
     const response: AxiosResponse = await cocktailsAPI.get(`/cocktails?page=${page}&perPage=12`);
+    return response.data;
+}
+
+export const fetchCocktail = async ({id} : {id: number}) => {
+    const response: AxiosResponse = await cocktailsAPI.get(`/cocktails/${id}`);
     return response.data;
 }
