@@ -7,7 +7,7 @@ const cocktailsAPI = axios.create({
     },
 });
 
-export type Cocktail = {
+export interface Cocktail {
     id: number,
     name: string,
     category: string,
@@ -17,6 +17,20 @@ export type Cocktail = {
     glass: string,
     createdAt: string,
     updatedAt: string,
+}
+
+export interface CocktailDetailed extends Cocktail {
+    ingredients: Ingredient[]
+}
+
+export type Ingredient = {
+    id: number,
+    name: string,
+    description: string,
+    alcohol: boolean,
+    type: string,
+    percentage: number | null,
+    measure: string,
 }
 
 export const fetchAllCocktails  = async (): Promise<Cocktail[]> => {

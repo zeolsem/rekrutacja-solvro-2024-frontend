@@ -42,7 +42,6 @@ const Navbar: React.FC = () => {
                 </div>
             ) : (
                 // Desktop
-                // Desktop
                 <div className='grid grid-cols-5 mx-auto items-center'>
                     {/* Featured sub-pages */}
                     <div className='col-span-1 flex justify-center p-4'>
@@ -51,7 +50,7 @@ const Navbar: React.FC = () => {
                     </div>
                     {/* Title */}
                     <div className='col-span-3 p-2 text-center'>
-                        <h1 className='text-5xl font-bold text-primary-100'>CocktailViewer3000</h1>
+                        <h1 className='text-5xl font-bold text-primary-100'>Bar Assistant</h1>
                     </div>
                     {/* Search field */}
                     <div className='col-span-1 flex items-center justify-center p-4'>
