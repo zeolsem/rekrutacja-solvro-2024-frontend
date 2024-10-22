@@ -9,7 +9,9 @@ export default {
     extend: {
       colors: {
         primary: colors.rose,
-        background: colors.amber,
+        primary_350: "#ED949F",
+        background: colors.zinc,
+        disabled: '#99435d',
       }
     },
   },
