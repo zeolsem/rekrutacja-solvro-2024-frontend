@@ -10,7 +10,7 @@ const MainLayout: React.FC = () => {
     return (
         <div className='min-h-screen flex flex-col'>
             <Navbar />
-            <div className='flex-grow bg-gradient-to-br bg-no-repeat bg-cover from-primary-300 to-background-300'>
+            <div className='flex-grow bg-gradient-to-br bg-no-repeat bg-cover from-primary-300 to-background-400'>
                 <Outlet />
             </div>
         </div>

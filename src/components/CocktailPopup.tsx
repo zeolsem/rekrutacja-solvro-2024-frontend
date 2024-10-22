@@ -2,9 +2,11 @@ import {useQuery} from "@tanstack/react-query";
 import {cocktailQuery} from "../api/queries.tsx";
 import React from "react";
 import {CocktailDetailed} from "../api/cocktailsAPI.tsx";
+import {FaX} from "react-icons/fa6";
+import {FavoriteButton} from "./FavoriteButton.tsx";
 
 
-const CocktailPopup: React.FC<{id:number}> = ({id}) => {
+const CocktailPopup: React.FC<{id:number, onClose: () => void}> = ({id, onClose}) => {
     const { status, data: response, error} = useQuery(cocktailQuery(id));
 
     if (status === 'pending') {
@@ -20,7 +22,20 @@ const CocktailPopup: React.FC<{id:number}> = ({id}) => {
 
     return (
         <div className='fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center'>
-            <div className='p-5 bg-background-200 text-primary-700 rounded-lg max-w-[600px] max-h-[90vh] overflow-y-auto'>
+            <div
+                className='p-4 bg-gradient-to-bl from-primary-400 to-background-600 text-white rounded-lg max-w-[600px] max-h-[90vh] overflow-y-auto'>
+                {/* Favorite and Close buttons */}
+                <div className='flex justify-between mb-4 bg-opacity-80 sticky top-0'>
+                    <FavoriteButton cocktailId={id} />
+
+                    <button
+                        onClick={onClose}
+                        className='text-primary-50 bg-primary-900 p-2 rounded-lg text-3xl font-bold'
+                    >
+                        {<FaX />}
+                    </button>
+                </div>
+                {/* Image */}
                 <div className='w-full overflow-hidden rounded-lg'>
                     <img
                         src={cocktail.imageUrl}
@@ -28,6 +43,7 @@ const CocktailPopup: React.FC<{id:number}> = ({id}) => {
                         className='w-full h-auto object-contain'
                     />
                 </div>
+                {/* Cocktail details */}
                 <h1 className="text-3xl font-bold text-center mb-1">{cocktail.name}</h1>
                 <h1 className='text-center mb-1'>{cocktail.alcoholic ? <b>Alcoholic</b> : "Non-alcoholic"}</h1>
                 <h1 className='text-center mb-1'>{cocktail.category}</h1>
@@ -38,8 +54,11 @@ const CocktailPopup: React.FC<{id:number}> = ({id}) => {
                     <h1 className='text-xl text-center font-bold'>Ingredients</h1>
                     {cocktail.ingredients.map(ingredient => (
                         <li className='mx-4' key={ingredient.id}>
-                            <p className='text'><strong>{ingredient.name}</strong><span>{ingredient.measure === null && <i>{" "}Warn! This ingredient database entry is not correct, fields may be missing/wrong.</i>}</span></p>
-                            {(ingredient.alcohol && ingredient.percentage) &&  <p>{ingredient.percentage}% alcohol</p>}
+                            <p className='text'>
+                                <strong>{ingredient.name}</strong><span>{ingredient.measure === undefined &&
+                                <i>{" "}Warn! This ingredient database entry is not correct, fields may be
+                                    missing/wrong.</i>}</span></p>
+                            {(ingredient.alcohol && ingredient.percentage) && <p>{ingredient.percentage}% alcohol</p>}
                             <p>{ingredient.measure}</p>
                         </li>
                     ))}

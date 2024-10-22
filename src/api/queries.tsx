@@ -1,4 +1,4 @@
-import {fetchAllCocktails, fetchCocktail, fetchCocktailsPage} from './cocktailsAPI.tsx';
+import {fetchAllCocktails, fetchCocktail, fetchCocktailsPage, fetchFavoriteCocktails} from './cocktailsAPI.tsx';
 import {keepPreviousData} from "@tanstack/react-query";
 
 export const cocktailsQuery = () => ({
@@ -16,4 +16,11 @@ export const cocktailsPageQuery = (page: number) => ({
 export const cocktailQuery = (id: number) => ({
     queryKey: ['cocktails', id],
     queryFn: async () => fetchCocktail({id}),
+})
+
+export const favoritesQuery = (favorites: number[]) => ({
+    queryKey: ['favorites', favorites],
+    queryFn: async () => fetchFavoriteCocktails({favorites}),
+    placeholderData: keepPreviousData,
+    staleTime: 3600,
 })

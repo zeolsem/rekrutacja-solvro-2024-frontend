@@ -47,3 +47,9 @@ export const fetchCocktail = async ({id} : {id: number}) => {
     const response: AxiosResponse = await cocktailsAPI.get(`/cocktails/${id}`);
     return response.data;
 }
+
+export const fetchFavoriteCocktails = async ({favorites}: {favorites: number[]}) => {
+    const url_string = 'cocktails?' + favorites.map(favorite => `id[]=${favorite}`).join('&');
+    const response: AxiosResponse = await cocktailsAPI.get(url_string);
+    return response.data;
+}

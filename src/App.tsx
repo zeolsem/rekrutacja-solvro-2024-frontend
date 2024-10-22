@@ -4,6 +4,7 @@ import MainLayout from "./layouts/MainLayout.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import CocktailsPage from "./pages/CocktailsPage.tsx";
 import {CocktailLoader} from "./loaders/CocktailLoader.tsx";
+import {FavoritesContextProvider} from "./contexts/FavoritesContext.tsx";
 
 function App() {
     const router=createBrowserRouter(
@@ -15,7 +16,11 @@ function App() {
         )
     );
 
-    return <RouterProvider router={router} />
+    return (
+        <FavoritesContextProvider>
+            <RouterProvider router={router} />
+        </FavoritesContextProvider>
+    );
 }
 
 export default App
