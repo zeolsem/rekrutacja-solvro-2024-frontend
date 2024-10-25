@@ -4,7 +4,7 @@ import CocktailPopup from "./CocktailPopup.tsx";
 
 const CocktailCard: React.FC<{cocktail: Cocktail}> = ({cocktail}) => {
     const [popupOpen, setPopupOpen] = useState(false);
-    const hoverStyle = "hover:bg-gradient-to-br hover:cursor-pointer hover:from-primary-700 hover:to-brown_dark"
+    const hoverStyle = "hover:bg-gradient-to-br hover:cursor-pointer hover:from-primary-400 hover:to-secondary-900"
 
     const openPopup = () => {
         setPopupOpen(true);
@@ -17,7 +17,7 @@ const CocktailCard: React.FC<{cocktail: Cocktail}> = ({cocktail}) => {
     return (
         <>
             <div onClick={openPopup}
-                 className={`rounded-md p-4 shadow-md m-3 bg-gradient-to-tl bg-no-repeat bg-cover from-primary-500 to-background-400 ${hoverStyle}`}>
+                 className={`rounded-md p-4 shadow-md m-3 bg-gradient-to-tl bg-no-repeat bg-cover from-primary-600 to-secondary-800 ${hoverStyle}`}>
                 <div className='flex items-start justify-between'>
                     <div className='m-3 w-36 h-36 overflow-hidden rounded-lg'>
                         <img

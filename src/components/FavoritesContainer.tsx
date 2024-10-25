@@ -24,14 +24,20 @@ export const FavoritesContainer = () => {
     }
     return (
         <div
-            className='flex flex-col text-center bg-gradient-to-tl from-background-400 to-primary_350 rounded-3xl p-4'
+            className='flex flex-col text-center bg-gradient-to-tl from-primary-400 to-primary_350 rounded-3xl p-4'
         >
             <h1 className='text-4xl font-semibold text-primary-900 mb-4'>Your favorite cocktails</h1>
-            <div className='grid grid-cols-1 lg:grid-cols-3'>
-                {favorites.data.map((cocktail: Cocktail) => (
-                    <CocktailCard key={cocktail.id} cocktail={cocktail} />
-                ))}
-            </div>
+
+            {favoriteIds?.length === 0 ?
+                <h1 className='text-center'>You don't have any favorite cocktails yet.</h1> :
+                <div className='grid grid-cols-1 lg:grid-cols-3'>
+                    {
+                        favorites.data.map((cocktail: Cocktail) => (
+                            <CocktailCard key={cocktail.id} cocktail={cocktail}/>))
+                    }
+                </div>
+            }
+
         </div>
     )
 }

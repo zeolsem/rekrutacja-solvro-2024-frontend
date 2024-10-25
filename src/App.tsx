@@ -11,7 +11,8 @@ function App() {
         createRoutesFromElements(
             <Route path='/' element={<MainLayout /> } errorElement={<ErrorPage />}>
                 <Route index element={<HomePage />}/>
-                <Route path='/cocktails/:page' element={<CocktailsPage />} loader={CocktailLoader}/>
+                <Route path='/cocktails/:page' element={<CocktailsPage query='' />} loader={CocktailLoader}/>
+                <Route path='/cocktails/search/:query/:page' element={<CocktailsPage query='' />} loader={CocktailLoader}/>
             </Route>
         )
     );

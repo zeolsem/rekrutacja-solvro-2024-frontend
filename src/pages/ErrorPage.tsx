@@ -15,8 +15,8 @@ const ErrorPage = () => {
     })();
 
     return (
-        <div className='flex flex-col font-semibold bg-slate-200 justify-center items-center h-screen text-3xl'>
-            <FaTriangleExclamation className='text-5xl text-orange-400'/>
+        <div className='flex flex-col font-semibold bg-background-600 justify-center items-center h-screen text-3xl'>
+            <FaTriangleExclamation className='text-5xl text-primary-400'/>
             <p>Sorry, an error has occurred.</p>
             <p>
                 <i>{shown_text}</i>
@@ -24,7 +24,7 @@ const ErrorPage = () => {
 
             <button
                 onClick={() => navigate('/')}
-                className="text-white font-medium text-2xl bg-indigo-700 hover:bg-indigo-900 rounded-md px-3 py-2 mt-4"
+                className="text-white font-medium text-2xl bg-primary-700 hover:bg-secondary-900 rounded-md px-3 py-2 mt-4"
             >Go To Main Page
             </button>
         </div>

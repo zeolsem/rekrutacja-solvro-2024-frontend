@@ -10,7 +10,8 @@ export default {
       colors: {
         primary: colors.rose,
         primary_350: "#ED949F",
-        background: colors.zinc,
+        secondary: colors.red,
+        background: colors.gray,
         disabled: '#99435d',
       }
     },

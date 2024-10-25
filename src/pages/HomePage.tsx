@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
             <FavoritesContainer />
             <Link
                 to='/cocktails/1'
-                className='text-primary-200 mb-4 text-3xl font-semibold bg-gradient-to-br from-primary-600 to-background-400 px-3 py-2 rounded-lg mt-4'
+                className='text-primary-200 mb-4 text-3xl font-semibold bg-gradient-to-br from-primary-600 to-secondary-700 px-3 py-2 rounded-lg mt-4'
             >
                 To cocktails search and view
             </Link>
