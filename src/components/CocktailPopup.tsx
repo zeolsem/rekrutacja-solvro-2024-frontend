@@ -5,7 +5,12 @@ import {CocktailDetailed} from "../api/cocktailsAPI.tsx";
 import {FaX} from "react-icons/fa6";
 import {FavoriteButton} from "./FavoriteButton.tsx";
 
-
+/**
+ * This component allows for user to view the ingredients and recipe of a cocktail in a popup.
+ * @param id
+ * @param onClose
+ * @constructor
+ */
 const CocktailPopup: React.FC<{id:number, onClose: () => void}> = ({id, onClose}) => {
     const { status, data: response, error} = useQuery(cocktailQuery(id));
 
@@ -23,7 +28,7 @@ const CocktailPopup: React.FC<{id:number, onClose: () => void}> = ({id, onClose}
     return (
         <div className='fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center'>
             <div
-                className='p-4 bg-gradient-to-bl from-primary-400 to-background-600 text-white rounded-lg max-w-[600px] max-h-[90vh] overflow-y-auto'>
+                className='p-4 bg-gradient-to-bl from-primary-400 to-secondary-900 text-white rounded-lg max-w-[600px] max-h-[90vh] overflow-y-auto'>
                 {/* Favorite and Close buttons */}
                 <div className='flex justify-between mb-4 bg-opacity-80 sticky top-0'>
                     <FavoriteButton cocktailId={id} />

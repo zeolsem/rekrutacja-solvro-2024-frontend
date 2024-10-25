@@ -1,21 +1,21 @@
 import {useQuery} from "@tanstack/react-query";
 import {cocktailsPageQuery} from "../api/queries.tsx";
-import {Cocktail} from "../api/cocktailsAPI.tsx";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {queryClient} from "../main.tsx";
-import CocktailCard from "../components/CocktailCard.tsx";
 import {useNavigate, useParams} from "react-router-dom";
+import {CocktailsContainer} from "../components/CocktailsContainer.tsx";
+import {FilterBar} from "../components/FilterBar.tsx";
 
 /**
- * This page shows paginated view of cocktail Cards.
+ * This page shows paginated view of cocktail Cards (no filters or search, a default query).
  * @constructor
  */
-const CocktailsPage = () => {
-    const navigate = useNavigate();
+const CocktailsPage: React.FC = () => {
     const { page: pageParam } = useParams();
+    const navigate = useNavigate();
     const page = Number(pageParam) || 1;
-    const { status, data: response, error, isFetching, isPlaceholderData } = useQuery(cocktailsPageQuery(page));
 
+    const {status, error, isFetching, isPlaceholderData, data: response}  = useQuery(cocktailsPageQuery(page));
 
     // Prefetch next page
     useEffect(() => {
@@ -27,56 +27,19 @@ const CocktailsPage = () => {
        }
     }, [response, isPlaceholderData, page]);
 
-    if (status === 'pending') {
-        return <div>Loading...</div>;
+    const onPrevious = () => navigate(`/cocktails/${Math.max(page - 1, 1)}`);
+    const onNext = () => {
+        if (response?.meta.lastPage) {
+            navigate(`/cocktails/${page < response.meta.lastPage ? page + 1 : page}`);
+        }
     }
-    else if (status === 'error') {
-        return <div>Error: {error.message}</div>
-    }
+
     return (
-        <div className='text-primary-50 flex flex-col items-center font-semibold'>
-            {/* Cocktail cards grid*/}
-            <div className='grid grid-cols-1 lg:grid-cols-3 container'>
-                {response.data.length === 0 ? (
-                    <i className='text-center'>No cocktails matching the query.</i>
-                ) : (
-                    response.data.map((cocktail: Cocktail) => (
-                        <CocktailCard key={cocktail.id} cocktail={cocktail}/>
-                    ))
-                )}
-            </div>
-            {/*Cocktail pages navigation buttons*/}
-            <div className='mx-auto flex flex-col justify-center items-center'>
-                <h1
-                    className='text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-brown_dark'
-                >
-                    Page {page}
-                </h1>
-                <div className='grid grid-cols-10 w-max whitespace-nowrap'>
-                    <button
-                        onClick={() => navigate(`/cocktails/${Math.max(page - 1, 1)}`)}
-                        disabled={page === 1}
-                        className='text-xl m-3 py-2 px-4 bg-primary-800 rounded-md col-span-1 col-start-5 disabled:bg-disabled'
-                    >
-                        Previous Page
-                    </button>
-                    <button
-                        onClick={() => {
-                            if (response?.meta.lastPage) {
-                                navigate(`/cocktails/${page < response.meta.lastPage ? page + 1 : page}`);
-                        }}}
-                        disabled={isPlaceholderData || page === response?.meta.lastPage}
-                        className='text-xl m-3 py-2 px-4 bg-primary-800 rounded-md col-span-1 col-start-6 disabled:bg-disabled'
-                    >
-                        Next Page
-                    </button>
-                </div>
-            </div>
-            {
-                isFetching ? <span> Loading...</span> : <></>
-            }
-        </div>
-    )
+        <>
+            <FilterBar />
+            <CocktailsContainer response={response} status={status} error={error} isFetching={isFetching} isPlaceholderData={isPlaceholderData} pageNumber={page} onNext={onNext} onPrevious={onPrevious} />
+        </>
+    );
 }
 
 export default CocktailsPage;

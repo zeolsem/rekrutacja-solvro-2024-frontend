@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { NavLink } from "react-router-dom";
+import {SearchBar} from "./SearchBar.tsx";
 
 /**
  * NavBar is always shown on top of the site and allows to quickly move between sub-pages,
@@ -31,7 +32,7 @@ const Navbar: React.FC = () => {
 
 
     return (
-        <nav className='bg-primary-600 flex-col p-3 border-b border-black'>
+        <nav className='bg-gradient-to-tl to-secondary-800 from-primary-600 flex-col p-3 border-b border-black'>
             {isMobile ? (
                 // Mobile
                 <div className='flex justify-center items-center'>
@@ -53,10 +54,7 @@ const Navbar: React.FC = () => {
                         <h1 className='text-5xl font-bold text-primary-100'>Bar Assistant</h1>
                     </div>
                     {/* Search field */}
-                    <div className='col-span-1 flex items-center justify-center p-4'>
-                        <h1 className='mx-3 font-bold text-xl text-primary-50'>Search cocktails:</h1>
-                        <input type='search' className='p-1 rounded-md border-primary-800 border-2'/>
-                    </div>
+                    <SearchBar />
                 </div>
             )}
         </nav>

@@ -53,3 +53,13 @@ export const fetchFavoriteCocktails = async ({favorites}: {favorites: number[]})
     const response: AxiosResponse = await cocktailsAPI.get(url_string);
     return response.data;
 }
+
+export const fetchCocktailsByName = async ({name, page}: {name: string, page: number}) => {
+    const response: AxiosResponse = await cocktailsAPI.get(`/cocktails?name=%${name}%&page=${page}&perPage=12`);
+    return response.data;
+}
+
+export const fetchCocktailsByCategory = async ({filters, page}: {filters: string, page: number}) => {
+    const response: AxiosResponse = await cocktailsAPI.get(`/cocktails?${filters}&page=${page}&perPage=12`);
+    return response.data;
+}
