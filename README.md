@@ -1,6 +1,7 @@
 # My take on frontend task for Solvro 2024 autumn recruitment.
 
 ### Tech Stack used: TypeScript, React, Tailwind CSS, axios, tanstack-query, react-router.
+#### Warn: there is a known bug where if you have over 15 favorited cocktails, the surplus ones are not showing.
 
 #### *Pre-project thoughts:*
 *The goal is to build a web app that allows to fetch and look through Solvro Cocktail API.*
