@@ -15,7 +15,7 @@ export const SearchBar: React.FC = () => {
 
     return (
         <form onSubmit={handleSubmit} className='col-span-1 flex items-center justify-center p-4'>
-            <h1 className='mx-3 font-bold text-xl lg:text-primary-50 text-transparent'>Search cocktails:</h1>
+            <h1 className='mx-3 font-bold text-xl text-primary-50'>Search cocktails:</h1>
             <input
                 type='search'
                 className='p-1 mr-24 rounded-md border-primary-800 border-2'

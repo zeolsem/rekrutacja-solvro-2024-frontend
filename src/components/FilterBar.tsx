@@ -50,7 +50,7 @@ export const FilterBar: React.FC = () => {
     };
 
     return (
-        <div className='flex text-primary-50 bg-background-700 justify-center gap-4 py-1 px-4'>
+        <div className='flex font-semibold text-primary-50 bg-background-700 justify-center gap-4 py-1 px-4 flex-wrap'>
             <div className='flex gap-1 items-center'>
                 <button
                     className={`px-3 rounded-md ${isAlcoholic === 'true' ? 'bg-primary-300 text-background-800' : 'bg-gray-500 text-white'}`}

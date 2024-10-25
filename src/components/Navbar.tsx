@@ -35,11 +35,12 @@ const Navbar: React.FC = () => {
         <nav className='bg-gradient-to-tl to-secondary-800 from-primary-600 flex-col p-3 border-b border-black'>
             {isMobile ? (
                 // Mobile
-                <div className='flex justify-center items-center'>
+                <div className='flex flex-col justify-center items-center'>
                     <div className='flex p-4 items-center'>
                         <NavLink to='/' className={linkClass}>Home</NavLink>
                         <NavLink to='/cocktails/1' className={linkClass}>Cocktails</NavLink>
                     </div>
+                    <SearchBar />
                 </div>
             ) : (
                 // Desktop
@@ -51,7 +52,7 @@ const Navbar: React.FC = () => {
                     </div>
                     {/* Title */}
                     <div className='col-span-3 p-2 text-center'>
-                        <h1 className='text-5xl font-bold text-primary-100'>Bar Assistant</h1>
+                        <h1 className='text-5xl font-bold text-transparent lg:text-primary-100'>Bar Assistant</h1>
                     </div>
                     {/* Search field */}
                     <SearchBar />

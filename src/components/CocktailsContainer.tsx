@@ -47,7 +47,7 @@ export const CocktailsContainer: React.FC<CocktailsContainerProps> = ({response,
             {/*Cocktail pages navigation buttons*/}
             <div className='mx-auto flex flex-col justify-center items-center'>
                 <h1
-                    className='text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-800'
+                    className='text-3xl font-extrabold text-secondary-800'
                 >
                     Page {pageNumber}
                 </h1>
