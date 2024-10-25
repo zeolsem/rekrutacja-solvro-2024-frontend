@@ -5,7 +5,12 @@ import {CocktailDetailed} from "../api/cocktailsAPI.tsx";
 import {FaX} from "react-icons/fa6";
 import {FavoriteButton} from "./FavoriteButton.tsx";
 
-
+/**
+ * This component allows for user to view the ingredients and recipe of a cocktail in a popup.
+ * @param id
+ * @param onClose
+ * @constructor
+ */
 const CocktailPopup: React.FC<{id:number, onClose: () => void}> = ({id, onClose}) => {
     const { status, data: response, error} = useQuery(cocktailQuery(id));
 

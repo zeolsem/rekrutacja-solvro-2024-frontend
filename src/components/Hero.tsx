@@ -1,3 +1,6 @@
+/**
+ * A banner for HomePage
+ */
 export const Hero = () => {
     return (
         <div

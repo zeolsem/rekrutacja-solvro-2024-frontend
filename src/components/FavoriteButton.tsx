@@ -2,6 +2,9 @@ import {FaStar} from "react-icons/fa6";
 import React, {useContext, useEffect, useState} from "react";
 import {FavoritesContext} from "../contexts/FavoritesContext.tsx";
 
+/**
+ * This component allows the user to add or remove a cocktail from their favorites in localStorage.
+ */
 export const FavoriteButton: React.FC<{cocktailId: number}> = ({cocktailId}) => {
     const favoritesContext = useContext(FavoritesContext);
 

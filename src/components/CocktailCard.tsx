@@ -2,6 +2,12 @@ import {Cocktail} from "../api/cocktailsAPI.tsx";
 import React, {useState} from "react";
 import CocktailPopup from "./CocktailPopup.tsx";
 
+/**
+ * An UI component that displays a cocktail card.
+ * When clicked, it opens a popup with more details about the cocktail.
+ * @param cocktail
+ * @constructor
+ */
 const CocktailCard: React.FC<{cocktail: Cocktail}> = ({cocktail}) => {
     const [popupOpen, setPopupOpen] = useState(false);
     const hoverStyle = "hover:bg-gradient-to-br hover:cursor-pointer hover:from-primary-400 hover:to-secondary-900"
