@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 
 const cocktailsAPI = axios.create({
-    baseURL: "/api",
+    baseURL: "https://cocktails.solvro.pl/api/v1/",
     headers: {
         "Content-Type": "application/json",
     },
